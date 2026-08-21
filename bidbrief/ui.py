@@ -41,7 +41,8 @@ class Worker(QThread):
     def run(self):
         from .scanner import scan_folder
 
-        files = scan_folder(self.folder, self.exts, self.recursive)
+        files = scan_folder(self.folder, self.exts, self.recursive,
+                            exclude_dirs=[self.out_dir])
         if not files:
             self.sig_log.emit("所选文件夹中没有匹配的文件。")
             self.sig_done.emit({"cancelled": False, "exports": {}})

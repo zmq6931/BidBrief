@@ -38,9 +38,9 @@ def main():
             sys.exit(1)
         exts = [e.strip() for e in args.ext.split(",") if e.strip()]
         formats = [e.strip() for e in args.formats.split(",") if e.strip()]
-        files = scan_folder(args.cli, exts, recursive=True)
-        print(f"找到 {len(files)} 个文件")
         out = args.out or os.path.join(args.cli, "BidBrief_输出")
+        files = scan_folder(args.cli, exts, recursive=True, exclude_dirs=[out])
+        print(f"找到 {len(files)} 个文件")
         result = run_and_export(cfg, files, out, formats=formats, on_log=print)
         n_ok = sum(1 for f in result["file_results"] if f["status"].startswith("完成"))
         print(f"完成：{n_ok}/{len(files)}")
