@@ -2,7 +2,7 @@
 import os
 
 # Supported file types (keep in sync with parser.py)
-SUPPORTED_EXTENSIONS = [".pdf", ".docx", ".txt", ".md"]
+SUPPORTED_EXTENSIONS = [".pdf", ".docx", ".xlsx", ".xls", ".ppt", ".pptx", ".txt", ".md"]
 
 
 def scan_folder(folder, extensions, recursive=True):

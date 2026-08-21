@@ -14,7 +14,8 @@ import sys
 def main():
     ap = argparse.ArgumentParser(description="BidBrief — 招标文件要点提取")
     ap.add_argument("--cli", metavar="目录", help="命令行模式：处理指定文件夹")
-    ap.add_argument("--ext", default=".pdf,.docx,.txt,.md", help="命令行模式：文件后缀，逗号分隔")
+    ap.add_argument("--ext", default=".pdf,.docx,.xlsx,.xls,.ppt,.pptx,.txt,.md",
+                    help="命令行模式：文件后缀，逗号分隔")
     ap.add_argument("--formats", default="xlsx,docx,pptx,md",
                     help="命令行模式：导出格式，逗号分隔（xlsx/docx/pptx/md）")
     ap.add_argument("--out", default=None, help="命令行模式：输出目录")

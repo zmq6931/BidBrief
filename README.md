@@ -16,7 +16,7 @@ python main.py
 
 界面四步：
 
-1. 选择招标文件所在文件夹，勾选文件类型（.pdf / .docx / .txt / .md），可选包含子文件夹
+1. 选择招标文件所在文件夹，勾选文件类型（.pdf / .docx / .xlsx / .xls / .ppt / .pptx / .txt / .md），可选包含子文件夹
 2. 模型设置里填一次 API Key（自动保存到 config.json，下次不用再填）
 3. （可选）在"自定义抽取要求"里限定范围，例如：*仅做劳务分包，只关注分包资质、总包配合费、禁止转包条款及相关废标项*；支持任意筛选条件（如"只看与 BIM 相关的条款"），留空则按默认六类全量抽取
 4. 点 **开始**；随时可点 **停止**（当前小块完成后中止，已完成文件照常导出），结束后一键打开输出目录
@@ -63,7 +63,7 @@ main.py            入口（GUI / --cli / --selftest）
 selftest.py        端到端自测（生成样例招标PDF并校验结果）
 bidbrief/
   scanner.py       文件夹扫描 + 后缀过滤
-  parser.py        PDF/DOCX/TXT 解析（识别扫描件与加密件）
+  parser.py        PDF/DOCX/XLSX/XLS/PPTX/PPT/TXT 解析（识别扫描件与加密件）
   chunker.py       分块 + 原文摘录回搜定位精确页码
   extractor.py     DeepSeek 抽取（六类要点，自定义提示词，自动重试）
   pipeline.py      流水线（全程可取消，已完成结果保留）
@@ -86,5 +86,6 @@ API Key、自定义提示词在界面里修改后保存到该文件，换机器�
 
 - **扫描件 PDF**（无文字层）会标记为"跳过(扫描件需OCR)"，本期不做 OCR
 - **CA 加密 PDF** 无法读取（部分交易平台下载的文件）
-- DOCX / TXT 无页码信息，页码列显示"—"
+- **老格式 .ppt** 需本机安装 PowerPoint 才能读取（xlsx/pptx 无此要求，xls 不需要 Excel）
+- Excel / PPT / Word / TXT 均无页码信息，页码列显示"—"
 - AI 抽取仅供辅助核对，**不能替代人工确认**，投标前请逐条核对原文

@@ -100,9 +100,11 @@ class MainWindow(QMainWindow):
         lay.addWidget(QLabel("文件类型："), 1, 0)
         ext_lay = QHBoxLayout()
         self.ext_boxes = {}
+        # Office document formats are checked by default; txt/md are opt-in.
+        default_on = {".pdf", ".docx", ".xlsx", ".xls", ".ppt", ".pptx"}
         for ext in SUPPORTED_EXTENSIONS:
             cb = QCheckBox(ext)
-            cb.setChecked(ext == ".pdf")
+            cb.setChecked(ext in default_on)
             self.ext_boxes[ext] = cb
             ext_lay.addWidget(cb)
         self.cb_recursive = QCheckBox("包含子文件夹")
