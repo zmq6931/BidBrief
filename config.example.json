@@ -1,0 +1,11 @@
+{
+  "api_key": "在这里填你的 DeepSeek API Key",
+  "base_url": "https://api.deepseek.com",
+  "model": "deepseek-chat",
+  "max_tokens": 8192,
+  "temperature": 0.1,
+  "chunk_chars": 5000,
+  "request_timeout": 180,
+  "max_retries": 3,
+  "retry_wait": 5
+}
