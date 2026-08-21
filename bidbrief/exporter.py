@@ -31,6 +31,12 @@ def _page_label(item):
     return str(p)
 
 
+def _page_note(item):
+    """Markdown/PPT-friendly page annotation; office formats carry no pages."""
+    label = _page_label(item)
+    return f"（第{label}页）" if label != "—" else "（无页码）"
+
+
 def export_all(file_results, out_dir, formats=None):
     """Export all results into out_dir in the requested formats.
 
@@ -336,7 +342,7 @@ def _export_pptx(file_results, path):
     lines = []
     for fr in file_results:
         for item in fr.get("categories", {}).get("废标项", []):
-            lines.append(f"☐ {_item_text('废标项', item)}（第{_page_label(item)}页）")
+            lines.append(f"☐ {_item_text('废标项', item)}{_page_note(item)}")
     if lines:
         _ppt_paginate(prs, "废标项核对单（一票否决）", lines)
     else:
@@ -353,7 +359,7 @@ def _export_pptx(file_results, path):
             items = cats.get(cat, [])
             if not items:
                 continue
-            lines = [f"{_item_text(cat, item)}（第{_page_label(item)}页）" for item in items]
+            lines = [f"{_item_text(cat, item)}{_page_note(item)}" for item in items]
             _ppt_paginate(prs, f"{fname} — {cat}", lines)
 
     prs.save(path)
@@ -391,7 +397,7 @@ def _export_markdown(file_results, path):
     for fr in file_results:
         for item in fr.get("categories", {}).get("废标项", []):
             n += 1
-            lines.append(f"- [ ] **{n}.** {_item_text('废标项', item)}（第{_page_label(item)}页）")
+            lines.append(f"- [ ] **{n}.** {_item_text('废标项', item)}{_page_note(item)}")
             if item.get("原文摘录"):
                 lines.append(f"  > {item['原文摘录']}")
     if n == 0:
